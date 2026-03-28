@@ -1,0 +1,33 @@
+{
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "functions": {
+    "artifacts/api-server/dist/index.mjs": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/artifacts/api-server/dist/index.mjs"
+    },
+    {
+      "source": "/mockup/(.*)",
+      "destination": "/artifacts/mockup-sandbox/dist/$1"
+    },
+    {
+      "source": "/restaurant/(.*)",
+      "destination": "/artifacts/saiemaas-restaurant/dist/public/$1"
+    },
+    {
+      "source": "/",
+      "destination": "/artifacts/mockup-sandbox/dist/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3000",
+    "BASE_PATH": "/"
+  }
+}
