@@ -5,7 +5,8 @@
  * Saiemaa's Restaurant API
  * OpenAPI spec version: 0.2.0
  */
+import type { ListBookingsStatus } from "./listBookingsStatus";
 
-export interface HealthStatus {
-  status: string;
-}
+export type ListBookingsParams = {
+  status?: ListBookingsStatus;
+};

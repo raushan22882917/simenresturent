@@ -1,22 +1,31 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
-  version: 0.1.0
-  description: API specification
+  version: 0.2.0
+  description: Saiemaa's Restaurant API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: tables
+    description: Restaurant table management
+  - name: orders
+    description: Order management
+  - name: bookings
+    description: Table booking management
+  - name: contacts
+    description: Contact / enquiry management
+  - name: menu
+    description: Menu item management
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +33,431 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  # ─── TABLES ───────────────────────────────────────────
+  /tables:
+    get:
+      operationId: listTables
+      tags: [tables]
+      summary: List all tables
+      responses:
+        "200":
+          description: List of tables
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Table"
+    post:
+      operationId: createTable
+      tags: [tables]
+      summary: Create a table
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTableInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Table"
+
+  /tables/{id}:
+    get:
+      operationId: getTable
+      tags: [tables]
+      summary: Get table by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Table
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Table"
+    put:
+      operationId: updateTable
+      tags: [tables]
+      summary: Update a table
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTableInput"
+      responses:
+        "200":
+          description: Updated table
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Table"
+    delete:
+      operationId: deleteTable
+      tags: [tables]
+      summary: Delete a table
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ─── ORDERS ───────────────────────────────────────────
+  /orders:
+    get:
+      operationId: listOrders
+      tags: [orders]
+      summary: List all orders
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [pending, confirmed, preparing, ready, completed, cancelled]
+        - in: query
+          name: tableId
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Order"
+    post:
+      operationId: createOrder
+      tags: [orders]
+      summary: Create a new order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrderInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
+  /orders/{id}:
+    get:
+      operationId: getOrder
+      tags: [orders]
+      summary: Get order by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Order
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+    put:
+      operationId: updateOrder
+      tags: [orders]
+      summary: Update order status
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateOrderInput"
+      responses:
+        "200":
+          description: Updated order
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+    delete:
+      operationId: deleteOrder
+      tags: [orders]
+      summary: Delete an order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ─── BOOKINGS ─────────────────────────────────────────
+  /bookings:
+    get:
+      operationId: listBookings
+      tags: [bookings]
+      summary: List all bookings
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [pending, confirmed, cancelled, completed]
+      responses:
+        "200":
+          description: List of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Booking"
+    post:
+      operationId: createBooking
+      tags: [bookings]
+      summary: Create a booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBookingInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+
+  /bookings/{id}:
+    put:
+      operationId: updateBooking
+      tags: [bookings]
+      summary: Update booking status
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateBookingInput"
+      responses:
+        "200":
+          description: Updated booking
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+    delete:
+      operationId: deleteBooking
+      tags: [bookings]
+      summary: Delete booking
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ─── CONTACTS ─────────────────────────────────────────
+  /contacts:
+    get:
+      operationId: listContacts
+      tags: [contacts]
+      summary: List all contacts / enquiries
+      responses:
+        "200":
+          description: List of contacts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Contact"
+    post:
+      operationId: createContact
+      tags: [contacts]
+      summary: Submit a contact enquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateContactInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+
+  /contacts/{id}:
+    put:
+      operationId: updateContact
+      tags: [contacts]
+      summary: Update contact status / notes
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateContactInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+    delete:
+      operationId: deleteContact
+      tags: [contacts]
+      summary: Delete contact
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ─── MENU ITEMS ───────────────────────────────────────
+  /menu:
+    get:
+      operationId: listMenuItems
+      tags: [menu]
+      summary: List all menu items
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of menu items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MenuItem"
+    post:
+      operationId: createMenuItem
+      tags: [menu]
+      summary: Create a menu item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMenuItemInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MenuItem"
+
+  /menu/{id}:
+    put:
+      operationId: updateMenuItem
+      tags: [menu]
+      summary: Update a menu item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateMenuItemInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MenuItem"
+    delete:
+      operationId: deleteMenuItem
+      tags: [menu]
+      summary: Delete a menu item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ─── STATS ────────────────────────────────────────────
+  /stats:
+    get:
+      operationId: getStats
+      tags: [health]
+      summary: Get dashboard statistics
+      responses:
+        "200":
+          description: Stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +465,303 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    Table:
+      type: object
+      properties:
+        id:
+          type: integer
+        number:
+          type: integer
+        capacity:
+          type: integer
+        status:
+          type: string
+          enum: [available, occupied, reserved, inactive]
+        qrCode:
+          type: string
+        location:
+          type: string
+        createdAt:
+          type: string
+      required: [id, number, capacity, status, qrCode]
+
+    CreateTableInput:
+      type: object
+      properties:
+        number:
+          type: integer
+        capacity:
+          type: integer
+        location:
+          type: string
+        status:
+          type: string
+          enum: [available, occupied, reserved, inactive]
+      required: [number, capacity]
+
+    UpdateTableInput:
+      type: object
+      properties:
+        capacity:
+          type: integer
+        location:
+          type: string
+        status:
+          type: string
+          enum: [available, occupied, reserved, inactive]
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        tableId:
+          type: integer
+        tableNumber:
+          type: integer
+        customerName:
+          type: string
+        customerPhone:
+          type: string
+        items:
+          type: string
+        totalAmount:
+          type: string
+        status:
+          type: string
+          enum: [pending, confirmed, preparing, ready, completed, cancelled]
+        notes:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required: [id, tableId, items, status, createdAt]
+
+    CreateOrderInput:
+      type: object
+      properties:
+        tableId:
+          type: integer
+        customerName:
+          type: string
+        customerPhone:
+          type: string
+        items:
+          type: string
+        totalAmount:
+          type: string
+        notes:
+          type: string
+      required: [tableId, items]
+
+    UpdateOrderInput:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [pending, confirmed, preparing, ready, completed, cancelled]
+        notes:
+          type: string
+        totalAmount:
+          type: string
+
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        phone:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        guests:
+          type: integer
+        requests:
+          type: string
+        status:
+          type: string
+          enum: [pending, confirmed, cancelled, completed]
+        tableId:
+          type: integer
+        notes:
+          type: string
+        createdAt:
+          type: string
+      required: [id, name, phone, date, time, guests, status, createdAt]
+
+    CreateBookingInput:
+      type: object
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        guests:
+          type: integer
+        requests:
+          type: string
+      required: [name, phone, date, time, guests]
+
+    UpdateBookingInput:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [pending, confirmed, cancelled, completed]
+        tableId:
+          type: integer
+        notes:
+          type: string
+
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+          enum: [new, read, replied, closed]
+        notes:
+          type: string
+        createdAt:
+          type: string
+      required: [id, name, phone, status, createdAt]
+
+    CreateContactInput:
+      type: object
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
+      required: [name, phone]
+
+    UpdateContactInput:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [new, read, replied, closed]
+        notes:
+          type: string
+
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        nameMr:
+          type: string
+        category:
+          type: string
+          enum: [starters, main, beverages, desserts, specials]
+        price:
+          type: string
+        description:
+          type: string
+        ingredients:
+          type: string
+        image:
+          type: string
+        isPopular:
+          type: boolean
+        isAvailable:
+          type: boolean
+        createdAt:
+          type: string
+      required: [id, name, category, price, isAvailable, createdAt]
+
+    CreateMenuItemInput:
+      type: object
+      properties:
+        name:
+          type: string
+        nameMr:
+          type: string
+        category:
+          type: string
+          enum: [starters, main, beverages, desserts, specials]
+        price:
+          type: string
+        description:
+          type: string
+        ingredients:
+          type: string
+        image:
+          type: string
+        isPopular:
+          type: boolean
+        isAvailable:
+          type: boolean
+      required: [name, category, price]
+
+    UpdateMenuItemInput:
+      type: object
+      properties:
+        name:
+          type: string
+        nameMr:
+          type: string
+        category:
+          type: string
+          enum: [starters, main, beverages, desserts, specials]
+        price:
+          type: string
+        description:
+          type: string
+        ingredients:
+          type: string
+        image:
+          type: string
+        isPopular:
+          type: boolean
+        isAvailable:
+          type: boolean
+
+    DashboardStats:
+      type: object
+      properties:
+        totalOrders:
+          type: integer
+        pendingOrders:
+          type: integer
+        totalBookings:
+          type: integer
+        pendingBookings:
+          type: integer
+        totalContacts:
+          type: integer
+        newContacts:
+          type: integer
+        totalTables:
+          type: integer
+        availableTables:
+          type: integer
+        todayRevenue:
+          type: string
+      required: [totalOrders, pendingOrders, totalBookings, pendingBookings, totalContacts, newContacts, totalTables, availableTables]
