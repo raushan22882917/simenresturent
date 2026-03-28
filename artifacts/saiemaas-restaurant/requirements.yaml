@@ -1,0 +1,44 @@
+packages:
+  "framer-motion": "For premium page transitions, scroll-triggered animations, and the WhatsApp FAB pulse"
+  "@hookform/resolvers": "Zod validation resolver for the react-hook-form booking system"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility for merging tailwind classes safely"
+  "react-hook-form": "Form handling for the table booking section"
+  "zod": "Schema validation for forms"
+
+images:
+  - path: "artifacts/saiemaas-restaurant/public/images/hero-bg.png"
+    description: "Cinematic warm luxury restaurant interior, low lighting, elegant tables, gold accents, 4k"
+    aspect_ratio: "16:9"
+  - path: "artifacts/saiemaas-restaurant/public/images/chicken-lollipop.png"
+    description: "Gourmet food photography of crispy red chicken lollipop with spicy sauce on a dark slate plate"
+    aspect_ratio: "1:1"
+  - path: "artifacts/saiemaas-restaurant/public/images/chicken-tandoori.png"
+    description: "Gourmet food photography of smoky red chicken tandoori with lemon and onion garnish"
+    aspect_ratio: "1:1"
+  - path: "artifacts/saiemaas-restaurant/public/images/chicken-maratha.png"
+    description: "Gourmet food photography of rich Indian chicken maratha curry in a copper bowl"
+    aspect_ratio: "1:1"
+  - path: "artifacts/saiemaas-restaurant/public/images/paneer-curry.png"
+    description: "Gourmet food photography of rich creamy paneer tikka masala in a rustic bowl"
+    aspect_ratio: "1:1"
+  - path: "artifacts/saiemaas-restaurant/public/images/mojito.png"
+    description: "Gourmet photography of a refreshing green mint mojito with lime and ice in a tall glass, dark background"
+    aspect_ratio: "3:4"
+  - path: "artifacts/saiemaas-restaurant/public/images/cocktails.png"
+    description: "Gourmet photography of a luxurious glowing orange cocktail in a martini glass, bar background"
+    aspect_ratio: "3:4"
+  - path: "artifacts/saiemaas-restaurant/public/images/brownie.png"
+    description: "Gourmet photography of a sizzling chocolate brownie with melting vanilla ice cream and chocolate syrup"
+    aspect_ratio: "1:1"
+  - path: "artifacts/saiemaas-restaurant/public/images/gallery-1.png"
+    description: "Cinematic shot of an elegant dining table setting with wine glasses and warm ambient lighting"
+    aspect_ratio: "4:3"
+  - path: "artifacts/saiemaas-restaurant/public/images/gallery-2.png"
+    description: "Close up of delicious Indian appetizers arranged beautifully on a luxury wooden table"
+    aspect_ratio: "16:9"
+
+notes:
+  - The application is a static, one-page luxury restaurant website.
+  - The booking form integrates directly with WhatsApp.
+  - Generous usage of Framer Motion for premium scroll effects.

@@ -1,0 +1,152 @@
+Create a modern, mobile-first restaurant website for:
+
+Restaurant Name:
+Saiemaa's Family Dining And Bar
+Hindi/Marathi Name:
+साईमा फैमिली डायनिंग आणि बार
+
+Location:
+Teen Hath Naka, Thane West, Maharashtra, India
+
+Theme:
+Family-friendly + Premium + Warm + Night dining vibe
+
+Color Palette:
+- Primary: Dark Brown / Black (#1a1a1a)
+- Accent: Gold (#d4af37)
+- Secondary: Warm Orange (#ff7a00)
+- Background: Light Cream (#f8f5f0)
+
+Typography:
+- Headings: Bold, modern sans-serif
+- Body: Clean and readable
+
+-----------------------------------
+WEBSITE STRUCTURE
+-----------------------------------
+
+1. HERO SECTION
+- Full-width background with restaurant ambience image
+- Title: Saiemaa's Family Dining And Bar
+- Subtitle: Good Food. Great Vibes. Perfect Family Time.
+- Rating: 4.1 ⭐ (3960+ reviews)
+- Buttons:
+   - Reserve Table
+   - Order on WhatsApp
+   - View Menu
+
+2. ABOUT SECTION
+- Short description:
+  “One of the most loved family dining restaurants in Thane with great ambience, delicious food, and affordable pricing.”
+- Highlight:
+   - Family Dining
+   - Bar Available
+   - 10+ Years Consistency
+
+3. MENU SECTION
+- Grid layout with images
+Categories:
+   - Starters (Chicken Lollipop, Chicken Tandoori)
+   - Main Course (Chicken Maratha, Paneer Curry)
+   - Beverages (Mojito, Cocktails)
+   - Desserts (Brownie)
+- Add “Popular” badges
+
+4. GALLERY SECTION
+- Grid or carousel
+- Show food, ambience, drinks, people vibe
+
+5. REVIEWS SECTION
+- Show 3–5 reviews
+- Include rating (4.1)
+- Highlight keywords: “ambience”, “taste”, “family”
+
+6. SERVICES SECTION
+Icons + text:
+- Dine-in
+- Takeaway
+- No-contact delivery
+- Family seating
+
+7. LOCATION SECTION
+- Embedded Google Map
+- Address:
+  New Dev Ashish CHS Ltd, RTO Service Road,
+  Teen Hath Naka Flyover, Thane West
+- Phone: 081082 59655
+- Timing: Open 11 AM – Late Night
+
+8. CTA SECTION
+- Big bold section:
+   “Book Your Table Now”
+- Buttons:
+   - WhatsApp Order
+   - Call Now
+   - Reserve Table
+
+9. FOOTER
+- Logo
+- Quick links
+- Social media icons
+- Copyright
+
+-----------------------------------
+FUNCTIONAL FEATURES
+-----------------------------------
+
+1. WHATSAPP INTEGRATION (IMPORTANT)
+- Floating WhatsApp button
+- Pre-filled message:
+  “Hi, I want to order from Saiemaa’s”
+- Menu auto-send option
+
+2. TABLE BOOKING
+- Simple form:
+   - Name
+   - Phone
+   - Date
+   - Time
+   - Guests
+- On submit:
+   → Send data to WhatsApp or Supabase
+
+3. ADMIN PANEL (Basic)
+- Manage menu items
+- Update images
+- View bookings
+
+4. PERFORMANCE
+- Fast loading
+- Mobile-first design
+- PWA support (installable on phone)
+
+-----------------------------------
+UI STYLE
+-----------------------------------
+
+- Clean modern cards
+- Rounded corners (2xl)
+- Soft shadows
+- Smooth animations
+- Glassmorphism for hero buttons
+- Sticky navbar
+- Dark mode feel
+
+-----------------------------------
+EXTRA (SMART FEATURES)
+-----------------------------------
+
+- “Popular Dishes” highlight
+- Peak hours indicator
+- Quick reorder (future ready)
+- Multi-language toggle (English + Marathi)
+
+-----------------------------------
+OUTPUT REQUIRED
+-----------------------------------
+
+- Fully responsive website
+- Production-ready UI
+- Clean component structure
+- Optimized for mobile users
+- Ready to connect with Supabase backend
