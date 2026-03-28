@@ -14,15 +14,15 @@
     },
     {
       "source": "/mockup/(.*)",
-      "destination": "/artifacts/mockup-sandbox/dist/$1"
+      "destination": "/artifacts/mockup-sandbox/$1"
     },
     {
       "source": "/restaurant/(.*)",
       "destination": "/artifacts/saiemaas-restaurant/dist/public/$1"
     },
     {
-      "source": "/",
-      "destination": "/artifacts/mockup-sandbox/dist/index.html"
+      "source": "/((?!api|mockup|restaurant).*)",
+      "destination": "/artifacts/mockup-sandbox/$1"
     }
   ],
   "env": {
