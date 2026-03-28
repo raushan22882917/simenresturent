@@ -1,28 +1,41 @@
 {
-  "buildCommand": "pnpm run build",
-  "installCommand": "pnpm install",
-  "framework": null,
-  "functions": {
-    "artifacts/api-server/dist/index.mjs": {
-      "runtime": "nodejs18.x"
+  "version": 2,
+  "builds": [
+    {
+      "src": "artifacts/mockup-sandbox/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "artifacts/mockup-sandbox/dist"
+      }
+    },
+    {
+      "src": "artifacts/saiemaas-restaurant/package.json", 
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "artifacts/saiemaas-restaurant/dist/public"
+      }
+    },
+    {
+      "src": "artifacts/api-server/dist/index.mjs",
+      "use": "@vercel/node"
     }
-  },
-  "rewrites": [
+  ],
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/artifacts/api-server/dist/index.mjs"
+      "src": "/api/(.*)",
+      "dest": "/artifacts/api-server/dist/index.mjs"
     },
     {
-      "source": "/mockup/(.*)",
-      "destination": "/artifacts/mockup-sandbox/$1"
+      "src": "/mockup/(.*)",
+      "dest": "/artifacts/mockup-sandbox/$1"
     },
     {
-      "source": "/restaurant/(.*)",
-      "destination": "/artifacts/saiemaas-restaurant/dist/public/$1"
+      "src": "/restaurant/(.*)", 
+      "dest": "/artifacts/saiemaas-restaurant/$1"
     },
     {
-      "source": "/((?!api|mockup|restaurant).*)",
-      "destination": "/artifacts/mockup-sandbox/$1"
+      "src": "/(.*)",
+      "dest": "/artifacts/mockup-sandbox/$1"
     }
   ],
   "env": {
