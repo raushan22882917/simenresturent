@@ -1,21 +1,15 @@
 {
-  "builds": [
-    {
-      "src": "artifacts/mockup-sandbox/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "artifacts/mockup-sandbox/dist"
-      }
-    }
-  ],
+  "buildCommand": "cd artifacts/mockup-sandbox && npm run build",
+  "outputDirectory": "artifacts/mockup-sandbox/dist",
+  "installCommand": "pnpm install",
   "routes": [
     {
       "src": "/assets/(.*)",
-      "dest": "/artifacts/mockup-sandbox/assets/$1"
+      "dest": "/assets/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/artifacts/mockup-sandbox/index.html"
+      "dest": "/index.html"
     }
   ]
 }
