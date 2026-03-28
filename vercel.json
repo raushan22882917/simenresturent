@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "artifacts/mockup-sandbox/package.json",
@@ -7,40 +6,16 @@
       "config": {
         "distDir": "artifacts/mockup-sandbox/dist"
       }
-    },
-    {
-      "src": "artifacts/saiemaas-restaurant/package.json", 
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "artifacts/saiemaas-restaurant/dist/public"
-      }
-    },
-    {
-      "src": "artifacts/api-server/dist/index.mjs",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/artifacts/api-server/dist/index.mjs"
-    },
-    {
-      "src": "/mockup/(.*)",
-      "dest": "/artifacts/mockup-sandbox/$1"
-    },
-    {
-      "src": "/restaurant/(.*)", 
-      "dest": "/artifacts/saiemaas-restaurant/$1"
+      "src": "/assets/(.*)",
+      "dest": "/artifacts/mockup-sandbox/assets/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/artifacts/mockup-sandbox/$1"
+      "dest": "/artifacts/mockup-sandbox/index.html"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "PORT": "3000",
-    "BASE_PATH": "/"
-  }
+  ]
 }
